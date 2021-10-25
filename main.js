@@ -55,8 +55,18 @@ function drawMesh(faces, ctx) {
     if (faces.length > 0) {
 
         faces.forEach(face => {
-            console.log(face)
-            const keypoints = face.scaledMesh;
+            console.log(face);
+            ctx.beginPath();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "yellow";
+            ctx.rect(
+                face.boundingBox.topLeft[0],
+                face.boundingBox.topLeft[1],
+                face.boundingBox.bottomRight[0] - face.boundingBox.topLeft[0],
+                face.boundingBox.bottomRight[1] - face.boundingBox.topLeft[1]
+            );
+            ctx.stroke();
+            const keypoints = face.annotations.leftEyeIris;
             for (let i = 0; i < keypoints.length; i++) {
                 const [x, y, z] = keypoints[i];
 
